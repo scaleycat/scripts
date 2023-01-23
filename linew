@@ -1,0 +1,117 @@
+loadstring(game:HttpGet("https://pastebin.com/raw/DxvcTZ9G"))()
+
+
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("scaleycat hub", "DarkTheme")
+
+
+local combatTab = Window:NewTab("Combat")
+local abSection = combatTab:NewSection("Aimbot")
+local fovSection = combatTab:NewSection("FOV")
+local apSection = combatTab:NewSection("Aim Part")
+
+abSection:NewKeybind("Aimbot Toggle - change hotkey -->", "aimbot", Enum.KeyCode.F, function()
+	if _G.AimbotEnabled == true then
+	    _G.AimbotEnabled = false
+	elseif _G.AimbotEnabled == false then
+	    _G.AimbotEnabled = true
+	end
+end)
+
+abSection:NewToggle("Teamcheck", "toggle teamcheck", function(state)
+    if state then
+        _G.TeamCheck = true
+    else
+        _G.TeamCheck = false
+    end
+end)
+
+abSection:NewSlider("Smoothening", "Aimbot Smoothening", 5, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    _G.Sensitivity = s * 0.2
+end)
+
+
+
+apSection:NewDropdown("Aim Part", "Aim Part", {"Head", "UpperTorso", "LowerTorso"}, function(currentOption)
+    _G.AimPart = currentOption
+        
+end)
+
+fovSection:NewSlider("FOV size", "FOV size", 1000, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    _G.CircleRadius = s
+end)
+
+fovSection:NewToggle("FOV Visible", "FOV visible", function(state)
+    if state then
+        _G.CircleVisible = true
+    else
+        _G.CircleVisible = false
+    end
+end)
+
+fovSection:NewDropdown("FOV color", "FOV color", {"red", "blue", "white", "green", "black"}, function(currentOption)
+    if currentOption == 'red' then
+        _G.CircleColor = Color3.fromRGB(255, 0, 0)
+    elseif currentOption == 'blue' then
+        _G.CircleColor = Color3.fromRGB(0, 0, 255)
+    elseif currentOption == 'green' then
+        _G.CircleColor = Color3.fromRGB(0, 255, 0)
+    elseif currentOption == 'white' then
+        _G.CircleColor = Color3.fromRGB(255, 255, 255)
+    elseif currentOption == 'black' then
+        _G.CircleColor = Color3.fromRGB(0, 0, 0)
+    end
+end)
+
+
+local visualTab = Window:NewTab("Visuals")
+local espSection = visualTab:NewSection("ESP")
+
+espSection:NewToggle("ESP", "ESP", function(state)
+    if state then
+        _G.ESPVisible = true
+    else
+        _G.ESPVisible = false
+    end
+end)
+
+espSection:NewSlider("Text Size", "SliderInfo", 50, 10, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    _G.TextSize = s
+end)
+
+
+local playerTab = Window:NewTab("Player")
+local Section = playerTab:NewSection("Player")
+
+Section:NewSlider("Player FOV", "Player FOV", 120, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    while true do
+        Camera.FieldOfView = s
+        end
+end)
+
+Section:NewToggle("walkspeed", "toggle walkspeed", function(state)
+    while true do
+        wait(0.5)
+        if state then
+            wenabled = true
+        else
+            wenabled = false
+        end
+    end
+end)
+
+Section:NewSlider("walkspeed", "walkspeed", 120, 0, function(t) -- 1000 (MaxValue) | 20 (MinValue)
+    if wenabled == true then
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = t
+        end
+end)
+local worldTab = Window:NewTab("World")
+local Section = worldTab:NewSection("World")
+
+local worldTab = Window:NewTab("About")
+local Section = worldTab:NewSection("About")
+
+Section:NewKeybind("Menu Bind", "Menu Bind", Enum.KeyCode.F, function()
+	Library:ToggleUI()
+end)
